@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="back-link" title="Volver a la página principal">Volver a la Página Principal</a>
+        <h1>Examen de Programación</h1>
+        <div class="question">
+            <h2>Pregunta 1</h2>
+            <p>Descripción de la primera pregunta...</p>
+        </div>
+        <div class="question">
+            <h2>Pregunta 2</h2>
+            <p>Descripción de la segunda pregunta...</p>
+        </div>
+        <!-- Añade más preguntas según sea necesario -->
+        <a href="{{ url_for('home') }}" class="back-link" title="Volver a la página principal">Volver a la Página Principal</a>
+    </div>
+    
+</body>
+</html>

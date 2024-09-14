@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concurso de Programación</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .option:hover {
+            background: #0056b3;
+        }
+        .disabled {
+            background: #6c757d;
+            pointer-events: none;
+        }
+        #message {
+            color: #ff0000;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido al Concurso de Programación</h1>
+        <a href="{{ url_for('recursos') }}" class="option">Descargar Recursos</a>
+        <a href="#" id="exam-link" class="option disabled">Examen</a>
+        <p id="message"></p>
+        <a href="{{ url_for('cargar_proyecto') }}" class="option">Enviar Proyecto</a>
+    </div>
+    <script>
+        // Configurar la hora en la que se habilitará el examen (formato: año, mes, día, hora, minuto, segundo)
+        const examStartTime = new Date('2024-09-13T18:23:00'); // Cambia esta fecha y hora según necesites
+        
+        function updateCountdown() {
+            const now = new Date();
+            const examLink = document.getElementById('exam-link');
+            const message = document.getElementById('message');
+            
+            // Cálculo de la diferencia en horas, minutos y segundos
+            const timeDiff = examStartTime - now;
+            
+            if (timeDiff <= 0) {
+                examLink.classList.remove('disabled');
+                examLink.href = '{{ url_for('examen') }}'; // La página del examen
+                message.textContent = 'El examen ya está disponible.';
+                return;
+            }
+
+            const hoursLeft = Math.floor(timeDiff / (1000 * 60 * 60));
+            const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+            // Determinar si las unidades deben ser singular o plural
+            const hora = hoursLeft === 1 ? 'hora' : 'horas';
+            const minuto = minutesLeft === 1 ? 'minuto' : 'minutos';
+            const segundo = secondsLeft === 1 ? 'segundo' : 'segundos';
+
+            // Actualizar el mensaje con la cuenta regresiva
+            message.textContent = `El examen estará disponible en ${hoursLeft} ${hora}, ${minutesLeft} ${minuto} y ${secondsLeft} ${segundo}.`;
+        }
+        
+        // Actualizar el contador cada segundo
+        setInterval(updateCountdown, 1000);
+        
+        // Ejecutar la función al cargar la página
+        updateCountdown();
+    </script>
+</body>
+</html>

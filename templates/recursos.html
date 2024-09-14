@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos del Concurso</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        a::before {
+            content: '⬇️'; /* Icono de descarga */
+            margin-right: 10px;
+        }
+     </style>    
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('home') }}" class="back-link" title="Volver a la página principal">Volver a la Página Principal</a>
+        <h1>Recursos del Concurso de Programación</h1>
+        <a href="{{ url_for('static', filename='recursos/Scratch.zip') }}" download>Descargar Programa Scratch</a>
+        <a href="{{ url_for('static', filename='recursos/programa1.zip') }}" download>Descargar Material Para la Evaluación</a>
+        <a href="http://<IP_DE_LA_LAPTOP>/recursos/documento1.pdf" download>Descargar Documento 1</a>
+        <!-- Añade más enlaces según sea necesario -->
+    </div>
+</body>
+</html>

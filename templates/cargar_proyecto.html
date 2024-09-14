@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Proyecto de Scratch</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            color: #333;
+        }
+        .form-section {
+            margin-top: 20px;
+        }
+        .form-section label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        .form-section input[type="file"] {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form-section button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .form-section button:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        a.back-link {
+            display: inline-block;
+            margin: 20px 0;
+            color: #007bff;
+            text-decoration: none;
+        }
+        a.back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cargar Proyecto de Scratch</h1>
+        <a href="{{ url_for('home') }}" class="back-link" title="Volver a la página principal">Volver a la Página Principal</a>
+        <div class="form-section">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="scratch-file">Selecciona el archivo de Scratch (formatos .zip, .sb2, .sb3):</label>
+                <input type="file" id="scratch-file" name="scratch-file" accept=".zip, .sb2, .sb3" required aria-describedby="fileHelp">
+                <small id="fileHelp" class="form-text text-muted">El archivo debe ser en formato .zip, .sb2 o .sb3.</small>
+                <button type="submit">Subir Proyecto</button>
+            </form>
+            <!-- Área para mensajes de éxito o error -->
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <!-- Script para mostrar mensajes -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const message = params.get('message');
+            const messageElement = document.getElementById('message');
+            
+            if (message) {
+                messageElement.textContent = message;
+                messageElement.classList.add(params.get('type') === 'error' ? 'error' : 'success');
+            }
+        });
+    </script>
+</body>
+</html>
